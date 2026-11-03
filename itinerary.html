@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>釜山 5 天 4 夜｜行前清單與行程</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.0/babel.min.js"></script>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f2ece1;--card:#fffdf8;--ink:#12303f;--mut:#6b7c85;--acc:#0e7c86;--hot:#e0623f;--line:#e3dccd;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1c24;--card:#15293450;--ink:#e8eef0;--mut:#8fa4ad;--acc:#4fc3cc;--hot:#f0866a;--line:#244150;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useMemo}=React;
+const ld=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const Ic=({n,s=18})=>{const P={eye:<><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></>,off:<path d="M17.9 17.9A10.7 10.7 0 0 1 12 19c-6.4 0-10-7-10-7a18 18 0 0 1 5.1-5.9M9.9 4.2A9.7 9.7 0 0 1 12 4c6.4 0 10 7 10 7a18 18 0 0 1-2.2 3.2M1 1l22 22"/>,dn:<path d="m6 9 6 6 6-6"/>,ok:<path d="M20 6 9 17l-5-5"/>,map:<><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></>};
+return <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">{P[n]}</svg>};
+
+const IMG={soup:"photo-1582878826629-29b7ad1cdc43",rib:"photo-1544025162-d76694265947",crab:"photo-1559742811-822873691df8",chicken:"photo-1562967914-608f82629710",cafe:"photo-1501339847302-ac426a4a7cbb",sea:"photo-1507525428034-b723cf961d3e",night:"photo-1519501025264-65ba15a82390",spa:"photo-1540555700478-4be289fbecef"};
+const TAG={h:"機酒",f:"美食",t:"交通",s:"景點",p:"票券",w:"逛街"};
+const SH={
+s1:["樂天超市（釜田站）& 超商",[["想買","福順都家氣泡瑪格麗（樂天超市／便利商店找找）"],["想買","草莓／葡萄／優格（樂天超市）"],["想買","黑白大廚覆盆莓酒（7-ELEVEN）"],["想吃","PARIS Baguette（巧克力吉拿棒）"]]],
+s2:["廣安里逛街",[["想逛","SOUTEM 소유템（無人手機配件商店）"],["想逛","SCENTICA Gwangan（香氛店）"],["想逛","파니에 광안점 Panier gwangan（小東西選物店）"],["想逛","Boonhongene 분홍이네 Gift Shop（玩具店）"],["想逛","CRR 광안（貓咪選物店）"],["想買","幸運烏龜、SCENTICA 香水、HEATRAS 固體芳香罐"],["想吃/喝","All Sunday bagel、COMPOSE 咖啡"]]],
+s3:["西面地下街／樂天百貨／Samjung Tower",[["需辦","CHECK IN SEOUL／樂天會員卡（逛樂天時先辦）"],["想逛","Wacky willy（樂天百貨 7F，蝴蝶結棒球帽）"],["想逛","SPAO 西面中央店（買睡衣）"],["想買","NB 瑪莉珍鞋（樂天百貨）、SCENTICA 香水、HEATRAS 固體芳香罐"],["想吃","London bagel（樂天百貨）、JEONGLIMDANG 年糕（西面）、All Sunday bagel（西面）"],["想喝","MAMMOTH（草莓牛奶／奶茶／藍莓牛奶）、10% 咖啡（美式／奶茶）、COMPOSE 咖啡"]]],
+s4:["南浦洞／國際市場／BIFF",[["想逛","ART BOX（寶可夢吊飾）"],["想逛","大創"],["想逛","京信寢具"],["想逛","PLAIN"],["想喝","COMPOSE 咖啡"]]],
+s5:["海雲台海邊／逛街",[["想逛","STiiKERS 스티커즈（海雲台店）"],["想逛","海雲台地鐵站 5 號出口附近（大創、拍貼機）"],["想買","HEATRAS 固體芳香罐"],["想喝","COMPOSE 咖啡、星巴克"]]],
+s6:["新世界百貨 Centum City",[["需辦","新世界百貨會員卡（3 樓辦理，打 95 折）"],["想逛","Baget Farm 바게트팜（B1 大蒜麵包）"],["想逛","MIND BRIDGE（B2，韓版 Uniqlo）"],["想逛","EMIS（B2，韓國國民帽）"]]]};
+const I=(t,n,note,k,c,im,p,w,sh)=>({t,n,note,k:k||0,c,im,p,w,sh});
+const build=v=>[
+["11/06 (五)",[
+I("12:12–15:45","台灣→釜山 7C6152","機＋酒",0,"h","sea",0,31370),
+I("17:30–18:00","出機場到西面站","UBER；入住 Urbanstay Seomyeon",25000,"t"),
+I("18:00–19:00","山莊1988 土豆排骨湯","兩人份小；走路5分；當日預約",40000,"f","soup"),
+I("19:00–20:30","荒嶺山看夜景（早點上去）","開車25分／公車＋走路1h20；計程車到觀景休息區停車場：부산광역시 부산진구 전포동 산50-1",15000,"t","night"),
+I("20:30–22:30","樂天超市（釜田站）","23:00 打烊；開車30分",20000,"t",null,0,null,"s1"),
+I("22:30–23:00","回飯店","開車15分／公車15分",12000,"t")]],
+["11/07 (六)",[
+I("08:30–09:00","飯店附近買早餐","Egg Drop",30000,"f"),
+I("09:00–09:40","飯店→松島海上纜車站","開車33分／地鐵50分",15000,"t"),
+I("10:00","Visit Busan Pass 啟用（Big 5）","KKday 購買",0,"p",null,0,2758),
+I("10:00–11:00","松島海上纜車","從這裡開始用 Pass，搭來回",48000,"s","sea",1),
+I("11:15–11:30","松島→新東亞市場","開車10分／地鐵＋走路30分",12000,"t"),
+I("11:30–13:15","新東亞市場吃帝王蟹","順便點鮑魚粥／烤鮑魚；鎖定 8 號或 20 號攤位",120000,"f","crab"),
+I("13:15–14:00","新東亞市場→廣安里","開車30分／地鐵45分",3200,"t"),
+I("14:00–15:30","廣安里咖啡廳","Sydney Yogurt Lab；看海景咖啡廳有沒有位子",30000,"f","cafe"),
+I("15:30–17:00","廣安里逛街（小巷弄）","走路；*逛甚麼",0,"w",null,0,null,"s2"),
+I("17:00–19:00","稻草烤肋排","烤牛骨＋豬皮；NAVER 已訂位 17:30",70000,"f","rib"),
+I("19:00–20:00","廣安里看煙火","在街上看，找看看有沒有高點",0,"s","night"),
+I("20:00–20:30","廣安里→飯店","提前走避開人潮；開車40分／地鐵30分",3200,"t"),
+I("20:30–22:00","Samjung Tower","逛 Animate／Olive Young",0,"w",null,0,null,"s3"),
+I("22:00","PURADAK 炸雞宵夜","",30000,"f","chicken")]],
+["11/08 (日)",[
+I("08:30–10:00","釜田市場早餐","招牌明卵海苔飯捲再配其他；走路10分",20000,"f"),
+I("10:00–12:00","西面地下街→樂天百貨","先去領卡，想逛 NB；走路10分；*逛甚麼",0,"w",null,0,null,"s3"),
+I("12:00–13:00","三五亭蔘雞湯","紫蘇蔘雞湯＋煎餅；五人以上才可預約，建議現場候位",50000,"f"),
+I("13:00–13:30","西面→影島 Arte Museum","開車30分／公車50分",18000,"t"),
+I("13:30–15:00","Arte Museum","Pass 預計使用",44000,"s","sea",1),
+I("15:00–15:30","Arte Museum→Having Moment","開車20分／公車30分",15000,"t"),
+I("15:30–16:30","咖啡廳 Having Moment","走路",30000,"f","cafe"),
+I("16:30–18:00","白淺灘文化村看夕陽","走路",0,"s","sea"),
+I("18:00–18:30","白淺灘文化村→媽媽醬蟹","有公車就搭公車；開車15分／公車25分",15000,"t"),
+I("18:30–20:00","晚餐：媽媽醬蟹","電話預訂",70000,"f","crab"),
+I("20:00–20:30","南浦洞逛逛＋國際市場／BIFF 吃糖餅","走路；*逛甚麼",10000,"f",null,0,null,"s4"),
+I("20:30–21:00","南浦洞→飯店","開車25分／地鐵20分",3200,"t"),
+I("21:30","轉角豬腳宵夜","點一人份套餐可外帶配啤酒",30000,"f")]],
+["11/09 (一)",[
+I("09:00–09:30","飯店→Skyline","帶早餐；*早餐哪來（前晚買巴黎貝甜／超商，或西面外帶貝果咖啡）；開車35分／地鐵＋走路／公車1.2hr",18000,"t"),
+I("10:00–12:00","Skyline Luge 滑板車","Pass 預計使用",72000,"s","sea",1),
+I("12:00–12:30","Skyline→松亭站","也可搭公車；開車10分／地鐵公車25分",12000,"t"),
+I("12:30–14:00","海岸列車換票＋松亭站午餐","31cm 海鮮刀削麵或其他／吉拿棒",35000,"f"),
+I("14:00–14:30","海岸列車 松亭→青沙埔","Pass；14:00／14:12／14:30／15:00／15:12／15:30 發車",16000,"s","sea",1),
+I("14:30–16:00","青沙埔咖啡廳","Liberta／BRONI",30000,"f","cafe"),
+I("16:00–16:30","海岸列車 青沙埔→尾浦","Pass；16:12／16:25／16:42／17:12 發車",16000,"s","sea",1),
+I("16:30–18:00","老虎大福／鹽麵包＋OVONE 草莓蛋糕","走路；*OVONE 禮拜一沒開，找替代",30000,"f","cafe"),
+I("18:00–19:30","海雲台晚餐（韓式烤肉）","Haeundae Madangjip；走路",70000,"f","rib"),
+I("19:30–21:00","海雲台海邊散步＋大創、拍貼機","地鐵站 5 號出口附近",0,"w","sea",0,null,"s5"),
+I("21:00–21:40","海雲台→飯店","開車40分／地鐵35分",3200,"t"),
+I("22:00","西面站酒吧","*哪間",80000,"f")]],
+["11/10 (二)",[
+I("09:30–10:30","西面站早餐","秀英家豬肉湯飯或隨便湯飯；走路",20000,"f"),
+I("11:00–11:30","飯店→新世界","B2 寄放前4hr免費；*先記好寄放處在哪；開車25分／地鐵30分",3200,"t"),
+I("12:00–16:00","SPA Land","Pass 12:00 前進去，在裡面吃拉麵",54000,"s","spa",1),
+I("16:00–17:00","新世界百貨晚餐","巨大牛骨湯",50000,"f"),
+I("17:00–18:00","逛新世界百貨","",0,"w",null,0,null,"s6"),
+I("18:10–19:30","前往機場","機場巴士（UBER 便宜就搭 UBER）",19400,"t"),
+I("22:00–23:50","釜山→台灣 7C6163","返台",0,"h","night")]]];
+
+const CL=[["📁","證件與票券",["護照（效期6個月以上）","機票電子檔／憑證","飯店住宿預約單","Q-CODE／入境卡填寫","Visit Busan Pass／膠囊列車 KKday 憑證"]],
+["💳","金融支付",["海外高回饋信用卡／簽帳卡（開通海外刷卡與提款）","WOWPASS／T-Money 交通卡","韓圜現鈔"]],
+["📶","通訊網路",["韓國 eSIM／實體 SIM（確認漫遊設定與開通天數）"]],
+["⚡","3C 與充電設備",["手機充電器","轉接頭（韓國雙圓孔 4.8mm）","行動電源（隨身攜帶不可託運）","線材收納包"]],
+["👔","衣物穿搭",["保暖防風外套（11月海邊風大）","衛衣／毛衣／內搭","長褲／免燙休閒褲","好走耐磨鞋款／Dr. Martens","換洗衣物與免洗內著"]],
+["🧴","盥洗用品",["牙刷牙膏（韓國飯店多不主動提供）","旅行洗沐組","刮鬍刀","個人毛巾"]],
+["💄","美妝保養",["高保濕乳液／面霜（秋冬乾燥）","護唇膏","日常化妝品","防曬乳","卸妝備品"]],
+["💊","日常與隨身",["個人常備藥（感冒／止痛／胃腸／暈車藥）","濕紙巾／面紙","折疊雨傘","購物環保袋"]]];
+
+const Chk=({on,fn})=><button onClick={fn} aria-pressed={on} className="shrink-0 w-6 h-6 rounded-full border-2 grid place-items-center transition-colors" style={{borderColor:on?'var(--acc)':'var(--line)',background:on?'var(--acc)':'transparent',color:'#fff'}}>{on&&<Ic n="ok" s={14}/>}</button>;
+const fmt=n=>Math.round(n).toLocaleString();
+
+function App(){
+const [tab,setTab]=useState(()=>ld('tab','tl'));
+const v='B';
+const [ck,setCk]=useState(()=>ld('ck',{}));
+const [cost,setCost]=useState(()=>ld('cost',false));
+const [open,setOpen]=useState(null);const [so,setSo]=useState({});const [day,setDay]=useState(()=>ld('day',0));useEffect(()=>sv('day',day),[day]);
+useEffect(()=>sv('tab',tab),[tab]);useEffect(()=>sv('ck',ck),[ck]);useEffect(()=>sv('cost',cost),[cost]);
+const tg=k=>setCk(o=>({...o,[k]:!o[k]}));
+const days=useMemo(()=>build(v),[v]);
+const A=v==='A';
+const st=useMemo(()=>{const cat={h:0,f:0,t:0,p:0,o:0};let pv=0;
+const per=days.map(([l,its])=>{let k=0,w=0;its.forEach(it=>{const pass=it.p===1||(it.p===2&&A);const tw=it.w!=null?it.w:it.k/50;
+if(pass){pv+=it.k/50}else{w+=tw;k+=it.w!=null?it.w*50:it.k;cat[it.c==='h'||it.c==='f'||it.c==='t'||it.c==='p'?it.c:'o']+=tw}});return{k,w}});
+return{cat,pv,per,tot:Object.values(cat).reduce((a,b)=>a+b,0)}},[days,A]);
+const price=A?3480:2758;
+const done=days.reduce((a,[l,its],di)=>a+its.filter((x,i)=>ck['u'+di+i]).length,0),all=days.reduce((a,d)=>a+d[1].length,0);
+const clAll=CL.reduce((a,c)=>a+c[2].length,0),clDone=CL.reduce((a,c,ci)=>a+c[2].filter((x,i)=>ck['c'+ci+i]).length,0);
+return <div className="max-w-md mx-auto pb-16">
+<header className="sticky top-0 z-20 px-4 pt-3 pb-3" style={{background:'var(--bg)',borderBottom:'1px solid var(--line)'}}>
+<div className="flex items-baseline justify-between"><h1 className="text-xl font-bold">釜山 5 天 4 夜</h1><span className="text-xs" style={{color:'var(--mut)'}}>11/06–11/10・最新版</span></div>
+<div className="grid grid-cols-2 gap-2 mt-2">{[['cl','📋 行前清單'],['tl','🗺️ 行程總覽']].map(([k,l])=><button key={k} onClick={()=>setTab(k)} className="py-2 rounded-xl text-sm font-semibold" style={{background:tab===k?'var(--acc)':'var(--card)',color:tab===k?'#fff':'var(--ink)',border:'1px solid var(--line)'}}>{l}</button>)}</div>
+</header>
+<main className="px-4 pt-4">
+{tab==='cl'?<>
+<div className="card p-3 mb-3"><div className="flex justify-between text-sm font-semibold"><span>整體進度</span><span>{clDone}/{clAll}</span></div><div className="h-2 rounded-full mt-2" style={{background:'var(--line)'}}><div className="h-2 rounded-full" style={{width:clDone/clAll*100+'%',background:'var(--acc)'}}/></div></div>
+{CL.map(([e,t,its],ci)=><section key={ci} className="card p-4 mb-3"><h2 className="font-bold mb-2">{e} {t} <span className="text-xs font-normal" style={{color:'var(--mut)'}}>{its.filter((x,i)=>ck['c'+ci+i]).length}/{its.length}</span></h2>
+{its.map((x,i)=>{const k='c'+ci+i;return <div key={i} className="flex items-start gap-3 py-1.5"><Chk on={!!ck[k]} fn={()=>tg(k)}/><span className="text-sm leading-6" style={{opacity:ck[k]?.45:1,textDecoration:ck[k]?'line-through':'none'}}>{x}</span></div>})}</section>)}
+</>:<>
+<section className="card p-4 mb-4">
+<button onClick={()=>setCost(!cost)} className="w-full flex items-center justify-between"><span className="flex items-center gap-2 font-bold"><Ic n={cost?'eye':'off'}/>費用儀表板</span><span className="flex items-center gap-1 text-sm font-semibold" style={{color:'var(--acc)'}}>{cost?'':'約 NT$ '+fmt(st.tot)}<span style={{transform:cost?'rotate(180deg)':'none',display:'inline-flex'}}><Ic n="dn"/></span></span></button>
+{cost&&<div className="mt-3 text-sm">
+<div className="text-3xl font-bold" style={{color:'var(--acc)'}}>NT$ {fmt(st.tot)}</div>
+<div className="grid grid-cols-2 gap-2 mt-3">{[['機酒',st.cat.h],['餐費',st.cat.f],['交通',st.cat.t],['Pass',st.cat.p],...(st.cat.o?[['Pass 外景點',st.cat.o]]:[])].map(([l,n])=><div key={l} className="rounded-xl p-2" style={{background:'var(--bg)'}}><div className="text-xs" style={{color:'var(--mut)'}}>{l}</div><div className="font-semibold">NT$ {fmt(n)}</div></div>)}</div>
+<h3 className="font-bold mt-4 mb-1">每日小計</h3>
+{days.map(([l],i)=><div key={i} className="flex justify-between py-1" style={{borderTop:'1px solid var(--line)'}}><span>Day {i+1}　{l}</span><span>{fmt(st.per[i].k)} KRW／NT$ {fmt(st.per[i].w)}</span></div>)}
+<h3 className="font-bold mt-4 mb-1">Visit Busan Pass 價值</h3>
+<div className="rounded-xl p-3" style={{background:'var(--bg)'}}>方案票價 NT$ {fmt(price)}<br/>預計兌換原價 NT$ {fmt(st.pv)}<br/><b style={{color:st.pv>=price?'var(--acc)':'var(--hot)'}}>{st.pv>=price?'預計省下':'尚差'} NT$ {fmt(Math.abs(st.pv-price))}</b>
+{!A&&<div className="text-xs mt-1" style={{color:'var(--mut)'}}>Big 5 僅含 5 個景點，行程中標示 Pass 的有 6 項，請確認 SPA Land 是否可兌換。</div>}</div>
+<div className="text-xs mt-2" style={{color:'var(--mut)'}}>匯率以 1 TWD ≈ 50 KRW 估算；Pass 景點不重複計入花費。</div></div>}
+</section>
+<div className="grid grid-cols-5 gap-1.5 mb-4">{days.map(([l],i)=><button key={i} onClick={()=>{setDay(i);setOpen(null)}} className="py-2 rounded-xl text-center" style={{background:day===i?'var(--acc)':'var(--card)',color:day===i?'#fff':'var(--ink)',border:'1px solid var(--line)'}}><div className="text-[10px] opacity-80">Day {i+1}</div><div className="text-sm font-bold">{l.slice(0,5)}</div><div className="text-[10px]">週{l.slice(7,8)}</div></button>)}</div>
+<div className="text-sm mb-3 flex justify-between" style={{color:'var(--mut)'}}><span>行程完成進度</span><b>{done}/{all}</b></div>
+{days.map(([l,its],di)=>di!==day?null:<section key={di} className="mb-6">
+<div className="flex items-baseline justify-between mb-2"><h2 className="text-lg font-bold">Day {di+1}　<span className="text-base font-medium">{l}</span></h2><span className="text-xs" style={{color:'var(--mut)'}}>NT$ {fmt(st.per[di].w)}</span></div>
+<div className="relative pl-5" style={{borderLeft:'2px solid var(--line)',marginLeft:6}}>
+{its.map((it,i)=>{const k='u'+di+i,ok=!!ck[k],isO=open===k,pass=it.p===1||(it.p===2&&A);const tw=it.w!=null?it.w:it.k/50;
+return <div key={k} className="card mb-3 relative overflow-hidden">
+<span className="absolute w-3 h-3 rounded-full" style={{left:-27,top:18,background:ok?'var(--acc)':'var(--bg)',border:'2px solid var(--acc)'}}/>
+<div className="flex gap-3 p-3 items-start">
+<Chk on={ok} fn={()=>tg(k)}/>
+<div className="flex-1 min-w-0 cursor-pointer" onClick={()=>setOpen(isO?null:k)} style={{opacity:ok?.55:1}}>
+<div className="text-xs font-semibold" style={{color:'var(--acc)'}}>{it.t}</div>
+<div className="font-semibold leading-snug">{it.n}</div>
+<div className="flex flex-wrap items-center gap-1.5 mt-1 text-xs" style={{color:'var(--mut)'}}>
+<span className="px-2 py-0.5 rounded-full" style={{background:'var(--bg)'}}>{TAG[it.c]}</span>
+{pass&&<span className="px-2 py-0.5 rounded-full text-white" style={{background:'var(--acc)'}}>Pass 免費</span>}
+{(it.k>0||it.w)?<span>{pass?'原價 ':''}{it.w!=null?'NT$ '+fmt(tw):fmt(it.k)+' KRW（NT$ '+fmt(tw)+'）'}</span>:null}</div>
+</div>
+{it.im&&<img src={`https://images.unsplash.com/${IMG[it.im]}?w=500&auto=format&fit=crop&q=60`} alt="" loading="lazy" onError={e=>e.target.style.display='none'} onClick={()=>setOpen(isO?null:k)} className="w-16 h-16 rounded-xl object-cover shrink-0"/>}
+</div>
+{it.sh&&<div className="px-3 pb-3"><button onClick={()=>setSo(o=>({...o,[k]:!o[k]}))} className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold text-white" style={{background:'var(--hot)'}}><span>💡 點我看這區【想逛 / 想買 / 想吃喝】清單</span><span style={{transform:so[k]?'rotate(180deg)':'none',display:'inline-flex'}}><Ic n="dn"/></span></button>
+{so[k]&&<div className="mt-2 rounded-xl p-3" style={{background:'var(--bg)'}}><div className="text-sm font-bold mb-1">📍 {SH[it.sh][0]}</div>{SH[it.sh][1].map(([tg2,tx],j)=>{const sk='s'+it.sh+j;return <div key={j} className="flex items-start gap-3 py-1.5"><Chk on={!!ck[sk]} fn={()=>tg(sk)}/><span className="text-sm leading-6" style={{opacity:ck[sk]?.45:1,textDecoration:ck[sk]?'line-through':'none'}}><b className="mr-1" style={{color:tg2==='需辦'?'var(--hot)':'var(--acc)'}}>[{tg2}]</b>{tx}</span></div>})}</div>}</div>}
+{isO&&<div className="px-3 pb-3 pl-12 text-sm">
+{it.note&&<p className="mb-2" style={{color:'var(--mut)'}}>{it.note}</p>}
+{it.im&&<img src={`https://images.unsplash.com/${IMG[it.im]}?w=500&auto=format&fit=crop&q=60`} alt="" className="w-full h-32 object-cover rounded-xl mb-2"/>}
+<a href={'https://map.naver.com/p/search/'+encodeURIComponent(it.n.replace(/[→：].*$/,''))} target="_blank" rel="noopener" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold" style={{background:'var(--acc)'}}><Ic n="map" s={14}/>Naver Map 導航</a></div>}
+</div>})}
+</div></section>)}
+</>}
+</main></div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
