@@ -27,6 +27,60 @@ return <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="current
 
 const IMG={soup:"photo-1582878826629-29b7ad1cdc43",rib:"photo-1544025162-d76694265947",crab:"photo-1559742811-822873691df8",chicken:"photo-1562967914-608f82629710",cafe:"photo-1501339847302-ac426a4a7cbb",sea:"photo-1507525428034-b723cf961d3e",night:"photo-1519501025264-65ba15a82390",spa:"photo-1540555700478-4be289fbecef"};
 const TAG={h:"機酒",f:"美食",t:"交通",s:"景點",p:"票券",w:"逛街"};
+const NAVER_LOC={
+  "台灣→釜山 7C6152":"김해국제공항",
+  "出機場到西面站":"어반스테이 서면",
+  "山莊1988 土豆排骨湯":"산장1988 서면",
+  "荒嶺山看夜景（早點上去）":"황령산봉수대 주차장",
+  "樂天超市（釜田站）":"롯데마트 부산점",
+  "回飯店":"어반스테이 서면",
+  "飯店附近買早餐":"에그드랍 서면롯데후문점",
+  "飯店→松島海上纜車站":"송도해상케이블카",
+  "Visit Busan Pass 啟用（Big 5）":"송도해상케이블카",
+  "松島海上纜車":"송도해상케이블카",
+  "松島→新東亞市場":"신동아수산물종합시장",
+  "新東亞市場吃帝王蟹":"신동아수산물종합시장",
+  "新東亞市場→廣安里":"광안리해수욕장",
+  "廣安里咖啡廳":"시드니요거트랩 광안리",
+  "廣安里逛街（小巷弄）":"광안리해수욕장",
+  "稻草烤肋排":"짚신매운갈비찜 광안점",
+  "廣安里看煙火":"광안리해수욕장",
+  "廣安里→飯店":"어반스테이 서면",
+  "Samjung Tower":"삼정타워",
+  "PURADAK 炸雞宵夜":"푸라닭 부산서면점",
+  "釜田市場早餐":"부전마켓타운",
+  "西面地下街→樂天百貨":"롯데백화점 부산본점",
+  "三五亭蔘雞湯":"삼오정 서면",
+  "西面→影島 Arte Museum":"아르떼뮤지엄 부산",
+  "Arte Museum":"아르떼뮤지엄 부산",
+  "Arte Museum→Having Moment":"해빙모먼트",
+  "咖啡廳 Having Moment":"해빙모먼트",
+  "白淺灘文化村看夕陽":"흰여울문화마을",
+  "白淺灘文化村→媽媽醬蟹":"엄마간장게장 남포",
+  "晚餐：媽媽醬蟹":"엄마간장게장 남포",
+  "南浦洞逛逛＋國際市場／BIFF 吃糖餅":"비프광장",
+  "南浦洞→飯店":"어반스테이 서면",
+  "轉角豬腳宵夜":"모퉁이족발 서면",
+  "飯店→Skyline":"스카이라인루지 부산",
+  "Skyline Luge 滑板車":"스카이라인루지 부산",
+  "Skyline→松亭站":"해운대블루라인파크 송정정거장",
+  "海岸列車換票＋松亭站午餐":"동해물칼국수 송정",
+  "海岸列車 松亭→青沙埔":"해운대블루라인파크 청사포정거장",
+  "青沙埔咖啡廳":"리베르타 청사포",
+  "海岸列車 青沙埔→尾浦":"해운대블루라인파크 미포정거장",
+  "老虎大福／鹽麵包＋OVONE 草莓蛋糕":"호랑이젤라떡",
+  "海雲台晚餐（韓式烤肉）":"해운대 마당집",
+  "海雲台海邊散步＋大創、拍貼機":"해운대해수욕장",
+  "海雲台→飯店":"어반스테이 서면",
+  "Make Zero":"메이크제로",
+  "西面站早餐":"수영본가돼지국밥 서면",
+  "飯店→新世界":"신세계백화점 센텀시티점",
+  "SPA Land":"신세계 센텀시티 스파랜드",
+  "新世界百貨晚餐":"거대곰탕 신세계센텀시티",
+  "逛新世界百貨":"신세계백화점 센텀시티점",
+  "前往機場":"김해국제공항",
+  "釜山→台灣 7C6163":"김해국제공항"
+};
 const SH={
 s1:["樂天超市（釜田站）& 超商",[["想買","福順都家氣泡瑪格麗（樂天超市／便利商店找找）"],["想買","草莓／葡萄／優格（樂天超市）"],["想買","黑白大廚覆盆莓酒（7-ELEVEN）"],["想吃","PARIS Baguette（巧克力吉拿棒）"]]],
 s2:["廣安里逛街",[["想逛","SOUTEM 소유템（無人手機配件商店）"],["想逛","SCENTICA Gwangan（香氛店）"],["想逛","파니에 광안점 Panier gwangan（小東西選物店）"],["想逛","Boonhongene 분홍이네 Gift Shop（玩具店）"],["想逛","CRR 광안（貓咪選物店）"],["想買","幸運烏龜、SCENTICA 香水、HEATRAS 固體芳香罐"],["想吃/喝","All Sunday bagel、COMPOSE 咖啡"]]],
@@ -84,7 +138,7 @@ I("16:30–18:00","老虎大福／鹽麵包＋OVONE 草莓蛋糕","走路；*OVO
 I("18:00–19:30","海雲台晚餐（韓式烤肉）","Haeundae Madangjip；走路",70000,"f","rib"),
 I("19:30–21:00","海雲台海邊散步＋大創、拍貼機","地鐵站 5 號出口附近",0,"w","sea",0,null,"s5"),
 I("21:00–21:40","海雲台→飯店","開車40分／地鐵35分",3200,"t"),
-I("22:00","西面站酒吧","*哪間",80000,"f")]],
+I("22:00","Make Zero","訂位2300",80000,"f")]],
 ["11/10 (二)",[
 I("09:30–10:30","西面站早餐","秀英家豬肉湯飯或隨便湯飯；走路",20000,"f"),
 I("11:00–11:30","飯店→新世界","B2 寄放前4hr免費；*先記好寄放處在哪；開車25分／地鐵30分",3200,"t"),
@@ -171,7 +225,7 @@ return <div key={k} className="card mb-3 relative overflow-hidden">
 {isO&&<div className="px-3 pb-3 pl-12 text-sm">
 {it.note&&<p className="mb-2" style={{color:'var(--mut)'}}>{it.note}</p>}
 {it.im&&<img src={`https://images.unsplash.com/${IMG[it.im]}?w=500&auto=format&fit=crop&q=60`} alt="" className="w-full h-32 object-cover rounded-xl mb-2"/>}
-<a href={'https://map.naver.com/p/search/'+encodeURIComponent(it.n.replace(/[→：].*$/,''))} target="_blank" rel="noopener" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold" style={{background:'var(--acc)'}}><Ic n="map" s={14}/>Naver Map 導航</a></div>}
+<a href={'https://map.naver.com/p/search/'+encodeURIComponent(NAVER_LOC[it.n]||it.n.replace(/[→：].*$/,''))} target="_blank" rel="noopener" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold" style={{background:'var(--acc)'}}><Ic n="map" s={14}/>Naver Map 導航</a></div>}
 </div>})}
 </div></section>)}
 </>}
