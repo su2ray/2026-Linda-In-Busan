@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>看屋現場 Checklist & 教戰手則｜四間房完整版</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --primary: #1e3a5f;
+      --primary-light: #e8eff7;
+      --accent: #2b6cb0;
+      --success: #2f855a;
+      --warning: #b7791f;
+      --warning-bg: #fefcbf;
+      --text: #1a202c;
+      --muted: #4a5568;
+      --border: #e2e8f0;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      padding-bottom: 84px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+      color: #fff;
+      padding: 16px 14px 14px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.14);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .summary-trigger {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .tab-btn {
+      padding: 8px 4px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    .tab-btn span {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    }
+    .tab-btn.active span {
+      color: var(--accent);
+      font-weight: 600;
+      opacity: 1;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-blue { background: var(--primary-light); color: var(--primary); }
+    .badge-green { background: #e6fffa; color: #234e52; }
+    .badge-amber { background: #fefcbf; color: #744210; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 0.84rem;
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .info-item span {
+      display: block;
+      font-size: 0.73rem;
+      color: var(--muted);
+    }
+    .info-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .info-item a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .progress-wrap {
+      background: #edf2f7;
+      border-radius: 999px;
+      height: 8px;
+      overflow: hidden;
+      margin: 8px 0 4px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: var(--success);
+      width: 0%;
+      transition: width 0.25s ease;
+    }
+    .progress-text {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* Sub-switch inside each property */
+    .sub-nav {
+      display: flex;
+      background: #edf2f7;
+      padding: 4px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      gap: 4px;
+    }
+    .sub-btn {
+      flex: 1;
+      padding: 7px 8px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .sub-btn.active {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 4px;
+      border-bottom: 1px dashed #edf2f7;
+      cursor: pointer;
+    }
+    .check-item:last-child {
+      border-bottom: none;
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .check-label {
+      font-size: 0.91rem;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .check-item.checked .check-label {
+      color: #a0aec0;
+      text-decoration: line-through;
+    }
+
+    .check-sub {
+      display: block;
+      font-size: 0.79rem;
+      color: var(--muted);
+      margin-top: 2px;
+      text-decoration: none !important;
+    }
+
+    .inline-inputs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .inline-inputs input, .note-input, .score-input {
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      padding: 6px 9px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .inline-inputs input:focus, .note-input:focus, .score-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.15);
+    }
+
+    .small-input {
+      width: 82px;
+    }
+
+    .note-input {
+      width: 100%;
+      min-height: 68px;
+      resize: vertical;
+      margin-top: 4px;
+    }
+
+    .script-box {
+      background: #f0f7ff;
+      border-left: 4px solid var(--accent);
+      padding: 11px 13px;
+      border-radius: 0 10px 10px 0;
+      margin: 10px 0;
+      font-size: 0.89rem;
+    }
+    .script-box.warn {
+      background: #fffbeb;
+      border-left-color: #d69e2e;
+    }
+    .script-box .step-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: block;
+    }
+    .script-box.warn .step-tag {
+      color: #b7791f;
+    }
+    .script-box p {
+      margin: 0;
+      color: #1a202c;
+    }
+
+    .tip-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.87rem;
+    }
+    .tip-list li {
+      margin-bottom: 7px;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .score-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 2px;
+    }
+    .score-box label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .score-box input {
+      width: 100%;
+      max-width: 48px;
+      text-align: center;
+      font-weight: 700;
+      padding: 4px;
+    }
+
+    /* Modal for Final Comparison */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-sheet {
+      background: #fff;
+      width: 100%;
+      max-width: 680px;
+      max-height: 85vh;
+      border-radius: 18px 18px 0 0;
+      padding: 18px 16px 28px;
+      overflow-y: auto;
+      animation: slideUp 0.22s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .action-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .action-btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .action-btn.danger {
+      color: #c53030;
+      border-color: #fed7d7;
+      background: #fff5f5;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <h1>🏠 看屋 Checklist & 教戰手則</h1>
+    <button class="summary-trigger" onclick="openSummary()">📊 四間總評比較</button>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('p1', this)">
+      1. 皇翔MRT
+      <span>11/20 五 20:00</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('p2', this)">
+      2. 光武街3F
+      <span>11/21 六 15:30</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('p3', this)">
+      3. 中央路三段
+      <span>11/22 日 15:00</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('p4', this)">
+      4. 松柏街4F
+      <span>11/22 日 20:00</span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- =========================================================
+       TAB 1: 土城・皇翔MRT
+       ========================================================= -->
+  <div id="p1" class="tab-panel active">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">1. 土城・皇翔MRT（承和街123號）</h2>
+        <span class="badge badge-green">屋主自租免仲介</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-item"><span>看屋時間</span><strong>11/20 (五) 20:00</strong></div>
+        <div class="info-item"><span>每月固定</span><strong>30,000 元（含管理費）</strong></div>
+        <div class="info-item"><span>聯絡人</span><strong>鄭先生 0925-304-460</strong></div>
+        <div class="info-item"><span>物件特性</span><strong>電梯大樓・全家電・無傢俱</strong></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="prog-p1"></div></div>
+      <div class="progress-text" id="text-p1">已完成 0 / 16 項</div>
+    </div>
+
+    <div class="sub-nav">
+      <button class="sub-btn active" onclick="scrollToBlock('p1-check', this)">✅ 現場 Checklist</button>
+      <button class="sub-btn" onclick="scrollToBlock('p1-guide', this)">🗣️ 專屬教戰手則</button>
+    </div>
+
+    <!-- P1 Checklist -->
+    <div id="p1-check">
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">一、養貓安全與居家動線（高齡雙貓）</h3></div>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c1" onchange="saveState()"><div class="check-label"><strong>大門防逃脫緩衝動線</strong><span class="check-sub">進門是否有玄關或可裝寵物柵欄的位置，防開門衝出梯廳？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c2" onchange="saveState()"><div class="check-label"><strong>窗戶類型（橫拉 vs 外推）</strong><span class="check-sub">確認窗型能否用伸縮桿／無痕固定防護網</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c3" onchange="saveState()"><div class="check-label"><strong>陽台欄杆間隙 & 管委會防護網規定</strong><span class="check-sub">管委會是否允許陽台加裝隱形鐵窗或束帶貓網？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c4" onchange="saveState()"><div class="check-label"><strong>地板防滑度 & 貓砂盆位置</strong><span class="check-sub">木地板或磁磚（老貓關節防滑）；陽台/浴室乾區擺放大型貓砂盆動線</span></div></label>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">二、屋況、採光、隔音與訊號實測</h3></div>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p1" data-key="p1_c5" onchange="saveState()"><div class="check-label"><strong>指南針測主要窗戶方位 & 是否面消防巷</strong><div class="inline-inputs"><input type="text" data-key="p1_dir" oninput="saveState()" placeholder="方位（如：朝南）" style="width:130px;"><input type="text" data-key="p1_view" oninput="saveState()" placeholder="窗外視野/棟距" style="width:140px;"></div></div></div>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c6" onchange="saveState()"><div class="check-label"><strong>氣密窗隔音與牆面濕氣檢查</strong><span class="check-sub">關窗聽車流/樓上腳步聲；檢查窗框四角、冷氣管線出口有無水漬壁癌</span></div></label>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p1" data-key="p1_c7" onchange="saveState()"><div class="check-label"><strong>台哥大網路訊號格數</strong><div class="inline-inputs"><input type="text" class="small-input" data-key="p1_s1" oninput="saveState()" placeholder="客廳"><input type="text" class="small-input" data-key="p1_s2" oninput="saveState()" placeholder="臥室"><input type="text" class="small-input" data-key="p1_s3" oninput="saveState()" placeholder="浴室"></div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">三、水電與全電設備機能測試</h3></div>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c8" onchange="saveState()"><div class="check-label"><strong>水壓與排水同時測試</strong><span class="check-sub">同時開蓮蓬頭＋廚房水龍頭＋沖馬桶；確認洗手台/浴室排水通暢無異味</span></div></label>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p1" data-key="p1_c9" onchange="saveState()"><div class="check-label"><strong>電熱水器規格（儲熱式公升數）</strong><span class="check-sub">兩人連洗建議 15–20 加侖以上，避免洗到一半變冷水</span><div class="inline-inputs"><input type="text" data-key="p1_wh" oninput="saveState()" placeholder="類型 / 加侖數" style="width:180px;"></div></div></div>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c10" onchange="saveState()"><div class="check-label"><strong>變頻冷氣／冰箱／洗脫烘／IH爐</strong><span class="check-sub">開冷氣測冷度與有無霉味，確認家電品牌容量與運轉正常</span></div></label>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">四、尺寸丈量與必問屋主（無傢俱・談判）</h3></div>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p1" data-key="p1_c11" onchange="saveState()"><div class="check-label"><strong>主臥與書桌空間丈量</strong><span class="check-sub">確認雙人床＋衣櫃＋書桌擺放尺寸與插座位置</span><div class="inline-inputs"><input type="text" data-key="p1_dim" oninput="saveState()" placeholder="主臥長寬 / 書桌位" style="width:200px;"></div></div></div>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c12" onchange="saveState()"><div class="check-label"><strong>租屋補助 vs 免費車位細節</strong><span class="check-sub">不申請租補送的是汽車位還是機車位（B幾）？若申請租補怎麼算？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c13" onchange="saveState()"><div class="check-label"><strong>長約議價、免租期與修繕責任</strong><span class="check-sub">簽2年長約能否折價？能否給3–7天免租期進傢俱？家電自然損壞屋主全責？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c14" onchange="saveState()"><div class="check-label"><strong>合約穩定度與寵物條款</strong><span class="check-sub">確認無中途收回自用計畫、合約明寫可養兩隻貓、退租無強制清潔費</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c15" onchange="saveState()"><div class="check-label"><strong>B2 垃圾集中 & 24H 包裹規定</strong><span class="check-sub">專用垃圾袋/開放時段、保全代收冷藏包裹方式</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p1" data-key="p1_c16" onchange="saveState()"><div class="check-label"><strong>社區搬家時段與貨梯規範</strong><span class="check-sub">假日能否搬家？是否需提前向管委會申請或鋪保護墊？</span></div></label>
+      </div>
+    </div>
+
+    <!-- P1 Strategy Guide -->
+    <div id="p1-guide" class="card">
+      <div class="card-header">
+        <h3 class="card-title">🗣️ 皇翔MRT 專屬教戰手則</h3>
+        <span class="badge badge-blue">打頭陣・不掀底牌</span>
+      </div>
+      <div class="script-box">
+        <span class="step-tag">1. 進門自然請求錄影（遠端給女友看）</span>
+        <p>「鄭先生不好意思，因為我女友目前人不在台北，沒辦法親自來看，我方便邊看邊拍幾段影片跟照片傳給她嗎？這樣我們週末比較好一起討論空間跟傢俱怎麼擺。」</p>
+      </div>
+      <ul class="tip-list">
+        <li><strong>必拍 3 鏡頭</strong>：①大門進玄關→客廳→陽台一鏡到底；②主臥床位與窗外棟距；③浴室乾濕分離與陽台貓砂盆空間。</li>
+      </ul>
+      <div class="script-box">
+        <span class="step-tag">2. 離開前緩兵之計＋拋出長約/免租期伏筆</span>
+        <p>「鄭先生，房子維持得很乾淨，家電也都很新，社區有管理跟 B2 垃圾集中對我們來說真的很加分，也很謝謝您願意讓我們帶兩隻老貓。不過因為我女友現在不在台北，我這兩天會先把影片跟尺寸整理給她，一起算一下床架、衣櫃跟書桌的採買預算，最晚<strong>下禮拜一（11/23）或禮拜二（11/24）</strong>一定給您明確答覆！<br><br>另外也先請教您，如果下週確定承租，因為我們兩個工作都很單純穩定（科技業跟公職），打算簽<strong>兩年長約</strong>，租金上不曉得還有沒有一點調整空間？或是因為要等傢俱進場，簽約後能不能給幾天免租期搬東西？這部分您週末也可以幫我們評估看看！」</p>
+      </div>
+      <div class="script-box warn">
+        <span class="step-tag">避坑提醒</span>
+        <p>不要提週末還要看別間；若屋主問預算底線，笑回：「我們週末先算一下買傢俱要花多少錢，下週一再跟您報一個合理的數字。」順口問一句這週末還有沒有其他人約看。</p>
+      </div>
+    </div>
+
+    <!-- P1 Notes & Score -->
+    <div class="card">
+      <h3 class="card-title">📝 皇翔MRT 現場筆記 & 評分</h3>
+      <textarea class="note-input" data-key="p1_notes" oninput="saveState()" placeholder="記錄現場優缺點、屋主態度、需補買傢俱預估金額..."></textarea>
+      <div class="score-grid">
+        <div class="score-box"><label>養貓(25)</label><input type="number" max="25" min="0" data-score="p1" oninput="calcScores()"></div>
+        <div class="score-box"><label>成本(25)</label><input type="number" max="25" min="0" data-score="p1" oninput="calcScores()"></div>
+        <div class="score-box"><label>屋況(25)</label><input type="number" max="25" min="0" data-score="p1" oninput="calcScores()"></div>
+        <div class="score-box"><label>設備(15)</label><input type="number" max="15" min="0" data-score="p1" oninput="calcScores()"></div>
+        <div class="score-box"><label>通勤(10)</label><input type="number" max="10" min="0" data-score="p1" oninput="calcScores()"></div>
+      </div>
+      <div style="text-align:right; font-weight:700; color:var(--primary); margin-top:8px;">本間總分：<span id="badge-p1">0</span> / 100 分</div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TAB 2: 板橋・光武街公寓 3F
+       ========================================================= -->
+  <div id="p2" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">2. 板橋・光武街108之1號 3F</h2>
+        <span class="badge badge-green">屋主自租免仲介</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-item"><span>看屋時間</span><strong>11/21 (六) 15:30</strong></div>
+        <div class="info-item"><span>每月固定</span><strong>27,500 元（確認有無管理費）</strong></div>
+        <div class="info-item"><span>聯絡人</span><strong>屋主 Lee Owen</strong></div>
+        <div class="info-item"><span>物件特性</span><strong>公寓3F・裝潢漂亮・有陽台</strong></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="prog-p2"></div></div>
+      <div class="progress-text" id="text-p2">已完成 0 / 13 項</div>
+    </div>
+
+    <div class="sub-nav">
+      <button class="sub-btn active" onclick="scrollToBlock('p2-check', this)">✅ 現場 Checklist</button>
+      <button class="sub-btn" onclick="scrollToBlock('p2-guide', this)">🗣️ 專屬教戰手則</button>
+    </div>
+
+    <div id="p2-check">
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">一、養貓同意度與安全檢查（首重關卡）</h3></div>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c1" onchange="saveState()"><div class="check-label"><strong>屋主明確同意養兩隻老貓</strong><span class="check-sub">確認合約可白紙黑字註明養兩隻貓，無額外寵物加價或強制清潔費</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c2" onchange="saveState()"><div class="check-label"><strong>大門防逃脫 & 樓梯間安全</strong><span class="check-sub">公寓3樓大門打開直接面對樓梯，有無玄關或可裝柵欄的緩衝區？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c3" onchange="saveState()"><div class="check-label"><strong>陽台與窗戶防墜條件</strong><span class="check-sub">舊鐵窗間隙是否太大？能否用束帶固定防護網或加裝伸縮桿貓網？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c4" onchange="saveState()"><div class="check-label"><strong>地板材質 & 陽台貓砂盆空間</strong><span class="check-sub">地板防滑度是否適合老貓；陽台曬衣與放貓砂盆空間是否充足</span></div></label>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">二、採光、隔音、訊號與老公寓體質</h3></div>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p2" data-key="p2_c5" onchange="saveState()"><div class="check-label"><strong>指南針測方位 & 是否面消防巷</strong><span class="check-sub">下午 3:30 看房正好可觀察西曬與採光真實狀況！</span><div class="inline-inputs"><input type="text" data-key="p2_dir" oninput="saveState()" placeholder="方位（如：坐東朝西）" style="width:150px;"><input type="text" data-key="p2_view" oninput="saveState()" placeholder="是否面防火巷/棟距" style="width:140px;"></div></div></div>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c6" onchange="saveState()"><div class="check-label"><strong>裝潢背後有無壁癌／漏水遮掩</strong><span class="check-sub">漂亮裝潢要特別摸一下外牆壁面、窗框四角、天花板有無潮濕或水漬</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c7" onchange="saveState()"><div class="check-label"><strong>水壓、熱水加熱速度 & 排水</strong><span class="check-sub">老公寓3樓水壓是否足夠？熱水器是瓦斯（陽台）還是電熱水器？</span></div></label>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p2" data-key="p2_c8" onchange="saveState()"><div class="check-label"><strong>台哥大訊號 & 巷弄路燈環境</strong><div class="inline-inputs"><input type="text" class="small-input" data-key="p2_s1" oninput="saveState()" placeholder="客廳訊號"><input type="text" class="small-input" data-key="p2_s2" oninput="saveState()" placeholder="臥室訊號"><input type="text" data-key="p2_lane" oninput="saveState()" placeholder="巷寬/路燈/隔音" style="width:130px;"></div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">三、附屬家電傢俱清單 & 合約必問</h3></div>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c9" onchange="saveState()"><div class="check-label"><strong>附屬家電與傢俱盤點</strong><span class="check-sub">冷氣是變頻還是定頻（看機身貼紙年份）？冰箱、洗衣機、床架、衣櫃、書桌有哪些？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c10" onchange="saveState()"><div class="check-label"><strong>水電費計價 & 總電箱安培數</strong><span class="check-sub">台水台電帳單自繳，還是房東一度電收多少？總開關是否為無熔絲開關（NFB）？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c11" onchange="saveState()"><div class="check-label"><strong>租屋補助 & 報稅確認</strong><span class="check-sub">確認可申請政府租屋補助，且不會因此漲租</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c12" onchange="saveState()"><div class="check-label"><strong>追垃圾車時間點 & 包裹領取</strong><span class="check-sub">附近垃圾車幾點經過？網購包裹如何收？樓梯轉角能否搬大型傢俱？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p2" data-key="p2_c13" onchange="saveState()"><div class="check-label"><strong>合約穩定度 & 修繕窗口</strong><span class="check-sub">簽至少1–2年長約，無中途收回自用計畫；後續報修直接找屋主本人？</span></div></label>
+      </div>
+    </div>
+
+    <div id="p2-guide" class="card">
+      <div class="card-header">
+        <h3 class="card-title">🗣️ 光武街 3F 專屬教戰手則</h3>
+        <span class="badge badge-blue">通勤最省時・攻克養貓</span>
+      </div>
+      <div class="script-box">
+        <span class="step-tag">1. 讓屋主放心把「漂亮裝潢」租給養貓人</span>
+        <p>「Lee 先生您好，我們兩個工作都很單純穩定（科技業跟公職），我們有養兩隻年紀很大的老貓，牠們平常幾乎都在睡覺、不會抓沙發也不會吵鬧，我們也很愛乾淨，合約上都可以白紙黑字簽寵物條款，退租一定幫您恢復原狀！」</p>
+      </div>
+      <div class="script-box">
+        <span class="step-tag">2. 遠端錄影給女友＋約定下週回覆</span>
+        <p>「因為我女友目前不在台北，我方便邊看邊錄一段影片傳給她嗎？這間離捷運站近、裝潢又維持得這麼好，我們非常喜歡。我今晚把影片跟細節傳給她討論，最晚<strong>下禮拜一（11/23）或禮拜二（11/24）</strong>一定給您明確回覆！」</p>
+      </div>
+      <div class="script-box warn">
+        <span class="step-tag">對比皇翔MRT的談判策略</span>
+        <p>光武街 3F 比皇翔每月省 2,500 元（一年省 3 萬），且進台北市中心通勤快很多；但少了電梯、代收包裹與垃圾集中。現場要特別評估<strong>「裝潢裡面包了多少傢俱家電」</strong>——如果連床、衣櫃、冷氣都齊全，初期可省下好幾萬採買費，CP 值會瞬間拉高！</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">📝 光武街 3F 現場筆記 & 評分</h3>
+      <textarea class="note-input" data-key="p2_notes" oninput="saveState()" placeholder="記錄是否可養貓、附了哪些傢俱家電、樓梯好不好爬..."></textarea>
+      <div class="score-grid">
+        <div class="score-box"><label>養貓(25)</label><input type="number" max="25" min="0" data-score="p2" oninput="calcScores()"></div>
+        <div class="score-box"><label>成本(25)</label><input type="number" max="25" min="0" data-score="p2" oninput="calcScores()"></div>
+        <div class="score-box"><label>屋況(25)</label><input type="number" max="25" min="0" data-score="p2" oninput="calcScores()"></div>
+        <div class="score-box"><label>設備(15)</label><input type="number" max="15" min="0" data-score="p2" oninput="calcScores()"></div>
+        <div class="score-box"><label>通勤(10)</label><input type="number" max="10" min="0" data-score="p2" oninput="calcScores()"></div>
+      </div>
+      <div style="text-align:right; font-weight:700; color:var(--primary); margin-top:8px;">本間總分：<span id="badge-p2">0</span> / 100 分</div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TAB 3: 土城・中央路三段
+       ========================================================= -->
+  <div id="p3" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">3. 土城・中央路三段</h2>
+        <span class="badge badge-amber">仲介帶看（約10.5K服務費）</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-item"><span>看屋時間</span><strong>11/22 (日) 15:00–18:00</strong></div>
+        <div class="info-item"><span>每月固定</span><strong>22,481 元（21K+1,481管）</strong></div>
+        <div class="info-item"><span>聯絡身分</span><strong>仲介（屋主為公務員）</strong></div>
+        <div class="info-item"><span>物件特性</span><strong>全空屋（無冷氣冰箱）・工業用地</strong></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="prog-p3"></div></div>
+      <div class="progress-text" id="text-p3">已完成 0 / 13 項</div>
+    </div>
+
+    <div class="sub-nav">
+      <button class="sub-btn active" onclick="scrollToBlock('p3-check', this)">✅ 現場 Checklist</button>
+      <button class="sub-btn" onclick="scrollToBlock('p3-guide', this)">🗣️ 專屬教戰手則</button>
+    </div>
+
+    <div id="p3-check">
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">一、工業宅與無家電致命成本檢查（最關鍵）</h3></div>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c1" onchange="saveState()"><div class="check-label"><strong>電表計費級距（住宅用電 vs 營業用電）</strong><span class="check-sub">工業用地最怕被算「營業用電」，夏月電費每度會貴非常多，務必看電費帳單確認！</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c2" onchange="saveState()"><div class="check-label"><strong>冷氣室外機安裝架 & 穿牆孔是否已留好</strong><span class="check-sub">無冷氣且若無安裝架／穿牆孔，裝兩台冷氣會多出好幾千元危險施工費</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c3" onchange="saveState()"><div class="check-label"><strong>冰箱、洗衣機、熱水器擺放尺寸與管線</strong><span class="check-sub">確認洗衣機與熱水器有無附？冰箱擺放位置寬度與獨立插座</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c4" onchange="saveState()"><div class="check-label"><strong>仲介費實際成數 & 屋主家電折抵條件</strong><span class="check-sub">仲介費是否收半個月（10,500元）？自費裝冷氣冰箱，屋主願減租多少或給免租裝潢期？</span></div></label>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">二、工業區周邊環境、採光與訊號實測</h3></div>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p3" data-key="p3_c5" onchange="saveState()"><div class="check-label"><strong>指南針測方位 & 是否面消防巷</strong><span class="check-sub">下午 3 點看房可直接測西曬與採光</span><div class="inline-inputs"><input type="text" data-key="p3_dir" oninput="saveState()" placeholder="方位（如：朝西）" style="width:140px;"><input type="text" data-key="p3_view" oninput="saveState()" placeholder="棟距/鄰房狀況" style="width:140px;"></div></div></div>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c6" onchange="saveState()"><div class="check-label"><strong>同棟或周邊是否有工廠噪音／粉塵／貨車</strong><span class="check-sub">工業用地大樓常混合小型加工廠或倉庫，開窗聽大車與機台聲</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c7" onchange="saveState()"><div class="check-label"><strong>水壓、熱水加熱速度 & 排水濕氣</strong><span class="check-sub">同時開兩處水龍頭＋沖馬桶測水壓；檢查天花板管線與牆角有無漏水痕跡</span></div></label>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p3" data-key="p3_c8" onchange="saveState()"><div class="check-label"><strong>台哥大訊號 & 晚上巷弄路燈安全性</strong><div class="inline-inputs"><input type="text" class="small-input" data-key="p3_s1" oninput="saveState()" placeholder="客廳訊號"><input type="text" class="small-input" data-key="p3_s2" oninput="saveState()" placeholder="臥室訊號"><input type="text" data-key="p3_lane" oninput="saveState()" placeholder="晚上路燈/環境" style="width:130px;"></div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">三、養貓安全 & 社區管理條件</h3></div>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c9" onchange="saveState()"><div class="check-label"><strong>屋主與管委會是否同意養兩隻貓</strong><span class="check-sub">確認合約明訂可養貓，且陽台/窗戶可加裝防護網防墜</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c10" onchange="saveState()"><div class="check-label"><strong>大門防逃脫動線 & 地板材質</strong><span class="check-sub">開門緩衝空間、地板防滑度、貓砂盆擺放處</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c11" onchange="saveState()"><div class="check-label"><strong>管理費 1,481 元包含哪些服務？</strong><span class="check-sub">有無24H管理員代收包裹、社區垃圾集中處理？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c12" onchange="saveState()"><div class="check-label"><strong>租屋補助確認（工業宅常有限制！）</strong><span class="check-sub">部分工業用地建物因稅籍/使用分區問題申請租補較嚴格，務必先向仲介確認</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p3" data-key="p3_c13" onchange="saveState()"><div class="check-label"><strong>後續報修窗口 & 合約穩定度</strong><span class="check-sub">簽約後有問題是直接找公務員屋主，還是由仲介／代管處理？</span></div></label>
+      </div>
+    </div>
+
+    <div id="p3-guide" class="card">
+      <div class="card-header">
+        <h3 class="card-title">🗣️ 中央路三段 專屬教戰手則</h3>
+        <span class="badge badge-amber">算清隱藏成本・讓仲介去砍價</span>
+      </div>
+      <div class="script-box">
+        <span class="step-tag">1. 善用仲介傳話，把「無冷氣冰箱」變成議價武器</span>
+        <p>「我們工作都很單純穩定（科技業跟公職），打算簽兩年長約。不過這間連冷氣跟冰箱都沒有，我們進場光買兩台變頻冷氣加冰箱、傢俱，初期就要先噴快 8～10 萬，還要加上仲介費。<br><br>麻煩你幫我們向公務員屋主溝通看看：如果我們願意長租兩年並自己處理冷氣冰箱，屋主願不願意<strong>每月折抵 2,500～3,000 元租金</strong>，或是<strong>前兩個月免租</strong>當作家電補貼？另外退租時冷氣是我們拆走還是屋主按殘值買回？」</p>
+      </div>
+      <div class="script-box">
+        <span class="step-tag">2. 遠端錄影給女友＋約定下週回覆</span>
+        <p>「我女友現在不在台北，我先拍幾段影片跟空屋尺寸回去跟她一起估算冷氣跟傢俱預算，最晚<strong>下禮拜一或禮拜二</strong>會給你回覆，到時候再請你幫我們跟屋主談看看！」</p>
+      </div>
+      <div class="script-box warn">
+        <span class="step-tag">財務精算提醒</span>
+        <p>表面月租 21K＋管理費 1,481 ＝ <strong>22,481 元</strong>，比皇翔MRT（30K）每月省 7,519 元（一年省約 9 萬）。但扣除仲介費（10,500元）與冷氣冰箱購置安裝費（約 6～8 萬）後，<strong>第一年幾乎沒省到錢，要住滿第二年以上才會真正回本</strong>！</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">📝 中央路三段 現場筆記 & 評分</h3>
+      <textarea class="note-input" data-key="p3_notes" oninput="saveState()" placeholder="記錄電費計價方式、冷氣安裝難度、工業區噪音狀況..."></textarea>
+      <div class="score-grid">
+        <div class="score-box"><label>養貓(25)</label><input type="number" max="25" min="0" data-score="p3" oninput="calcScores()"></div>
+        <div class="score-box"><label>成本(25)</label><input type="number" max="25" min="0" data-score="p3" oninput="calcScores()"></div>
+        <div class="score-box"><label>屋況(25)</label><input type="number" max="25" min="0" data-score="p3" oninput="calcScores()"></div>
+        <div class="score-box"><label>設備(15)</label><input type="number" max="15" min="0" data-score="p3" oninput="calcScores()"></div>
+        <div class="score-box"><label>通勤(10)</label><input type="number" max="10" min="0" data-score="p3" oninput="calcScores()"></div>
+      </div>
+      <div style="text-align:right; font-weight:700; color:var(--primary); margin-top:8px;">本間總分：<span id="badge-p3">0</span> / 100 分</div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TAB 4: 板橋・松柏街公寓 4F
+       ========================================================= -->
+  <div id="p4" class="tab-panel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">4. 板橋・松柏街36巷19號 4F</h2>
+        <span class="badge badge-green">屋主自租免仲介</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-item"><span>看屋時間</span><strong>11/22 (日) 20:00（約1樓等）</strong></div>
+        <div class="info-item"><span>每月固定</span><strong>24,800 元（確認有無管理費）</strong></div>
+        <div class="info-item"><span>聯絡人</span><strong>屋主 CiCichen 0930-025-496</strong></div>
+        <div class="info-item"><span>物件特性</span><strong>公寓4F・附基本傢俱・屋況偏舊</strong></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="prog-p4"></div></div>
+      <div class="progress-text" id="text-p4">已完成 0 / 13 項</div>
+    </div>
+
+    <div class="sub-nav">
+      <button class="sub-btn active" onclick="scrollToBlock('p4-check', this)">✅ 現場 Checklist</button>
+      <button class="sub-btn" onclick="scrollToBlock('p4-guide', this)">🗣️ 專屬教戰手則</button>
+    </div>
+
+    <div id="p4-check">
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">一、老屋屋況、隔熱防水與設備健檢</h3></div>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c1" onchange="saveState()"><div class="check-label"><strong>5樓是否為頂樓加蓋／露台（防熱防漏）</strong><span class="check-sub">公寓4樓若5樓是鐵皮頂加或頂樓，夏天會悶熱且天花板易漏水，仔細看天花板水漬</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c2" onchange="saveState()"><div class="check-label"><strong>冷氣機齡（定頻吃電怪獸 vs 變頻）</strong><span class="check-sub">屋況偏舊要看冷氣年份，若為老舊定頻機，夏天吹冷氣電費會非常驚人</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c3" onchange="saveState()"><div class="check-label"><strong>水壓、熱水器加熱速度 & 排水通暢</strong><span class="check-sub">4樓老管線水壓是否足夠？熱水器類型與加熱速度？浴室/廚房排水是否順暢無異味？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c4" onchange="saveState()"><div class="check-label"><strong>濕氣、通風與老舊壁癌檢查</strong><span class="check-sub">檢查牆壁下方踢腳板、窗框周圍有無粉化壁癌或潮濕霉味</span></div></label>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">二、方位、夜間巷弄環境與訊號（20:00實測）</h3></div>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p4" data-key="p4_c5" onchange="saveState()"><div class="check-label"><strong>指南針測方位 & 是否面對消防巷</strong><span class="check-sub">晚上看房沒有日照，務必用指南針判斷白天採光與西曬</span><div class="inline-inputs"><input type="text" data-key="p4_dir" oninput="saveState()" placeholder="方位（如：坐北朝南）" style="width:150px;"><input type="text" data-key="p4_view" oninput="saveState()" placeholder="是否面防火巷/棟距" style="width:140px;"></div></div></div>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c6" onchange="saveState()"><div class="check-label"><strong>36巷夜間路燈頻率、巷寬與治安環境</strong><span class="check-sub">晚上 8 點看房正好實測巷弄明亮度、路燈密度、會車與治安感覺</span></div></label>
+        <div class="check-item" style="cursor:default;"><input type="checkbox" data-prop="p4" data-key="p4_c7" onchange="saveState()"><div class="check-label"><strong>台哥大訊號 & 隔音測試</strong><div class="inline-inputs"><input type="text" class="small-input" data-key="p4_s1" oninput="saveState()" placeholder="客廳訊號"><input type="text" class="small-input" data-key="p4_s2" oninput="saveState()" placeholder="臥室訊號"><input type="text" data-key="p4_noise" oninput="saveState()" placeholder="鄰居/巷弄隔音" style="width:130px;"></div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">三、養貓安全（4樓防墜）與合約細節</h3></div>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c8" onchange="saveState()"><div class="check-label"><strong>屋主明確同意養兩隻老貓 & 寵物條款</strong><span class="check-sub">因附基本傢俱桌椅，確認舊傢俱若正常使用痕跡的認定標準</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c9" onchange="saveState()"><div class="check-label"><strong>4樓陽台／窗戶防墜網 & 大門緩衝</strong><span class="check-sub">高樓層防貓墜樓最關鍵！確認鐵窗能否綁網、大門進屋是否有玄關緩衝</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c10" onchange="saveState()"><div class="check-label"><strong>4樓樓梯爬行與搬運貓砂動線</strong><span class="check-sub">實際走一趟4樓樓梯（感受梯間寬度、照明與未來扛貓砂/買菜的體力負擔）</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c11" onchange="saveState()"><div class="check-label"><strong>老舊家電修繕責任歸屬</strong><span class="check-sub">屋況偏舊，入住後若冷氣、冰箱、熱水器自然損壞，確認由屋主全額負責修繕/換新</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c12" onchange="saveState()"><div class="check-label"><strong>水電計費、租屋補助 & 合約穩定度</strong><span class="check-sub">台水台電帳單？可申請租補？簽1–2年長約無中途收回自用計畫？</span></div></label>
+        <label class="check-item"><input type="checkbox" data-prop="p4" data-key="p4_c13" onchange="saveState()"><div class="check-label"><strong>垃圾車時間、包裹收件 & 報修窗口</strong><span class="check-sub">追垃圾車時間點、網購包裹怎麼收、後續問題找屋主本人還是代管？</span></div></label>
+      </div>
+    </div>
+
+    <div id="p4-guide" class="card">
+      <div class="card-header">
+        <h3 class="card-title">🗣️ 松柏街 4F 專屬教戰手則</h3>
+        <span class="badge badge-blue">週末壓軸・四間總決算</span>
+      </div>
+      <div class="script-box">
+        <span class="step-tag">1. 壓軸看屋優勢：心中已有前三間底牌</span>
+        <p>這間是週末最後一間（週日晚上 8 點），你已經看過皇翔MRT、光武街3F與中央路三段，現場可以直接用前幾間的標準做對照：<strong>「板橋地段＋24.8K免仲介費＋附基本傢俱」</strong>的省錢優勢，是否足以彌補「爬4樓＋屋況偏舊」？</p>
+      </div>
+      <div class="script-box">
+        <span class="step-tag">2. 針對屋況偏舊的修繕確認與議價話術</span>
+        <p>「CiCichen 您好，我們工作都很單純穩定（科技業跟公職），有養兩隻很安靜的老貓，打算簽一到兩年長約。我女友目前不在台北，我方便邊看邊錄影傳給她討論嗎？<br><br>另外也先跟您確認一下，因為家電跟裝潢看起來有一點年份，如果我們確定承租，入住後像冷氣、熱水器或管線有自然老化的問題，修繕方面都是由您這邊負責處理嗎？我們最晚<strong>下禮拜一（11/23）或禮拜二（11/24）</strong>會把四間討論完給您回覆！」</p>
+      </div>
+      <div class="script-box warn">
+        <span class="step-tag">夜間看屋必做動作</span>
+        <p>晚上看房容易忽略外牆或天花板水漬，記得<strong>打開手機手電筒斜照天花板與牆角</strong>（有波浪起伏或色差就是補過壁癌）；離開時順便在松柏街巷口走一圈，感受晚上回家的燈光與人流。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">📝 松柏街 4F 現場筆記 & 評分</h3>
+      <textarea class="note-input" data-key="p4_notes" oninput="saveState()" placeholder="記錄4樓樓梯感受、冷氣新舊、天花板有無漏水、夜間巷弄環境..."></textarea>
+      <div class="score-grid">
+        <div class="score-box"><label>養貓(25)</label><input type="number" max="25" min="0" data-score="p4" oninput="calcScores()"></div>
+        <div class="score-box"><label>成本(25)</label><input type="number" max="25" min="0" data-score="p4" oninput="calcScores()"></div>
+        <div class="score-box"><label>屋況(25)</label><input type="number" max="25" min="0" data-score="p4" oninput="calcScores()"></div>
+        <div class="score-box"><label>設備(15)</label><input type="number" max="15" min="0" data-score="p4" oninput="calcScores()"></div>
+        <div class="score-box"><label>通勤(10)</label><input type="number" max="10" min="0" data-score="p4" oninput="calcScores()"></div>
+      </div>
+      <div style="text-align:right; font-weight:700; color:var(--primary); margin-top:8px;">本間總分：<span id="badge-p4">0</span> / 100 分</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- =========================================================
+     MODAL: 四間總評分比較表
+     ========================================================= -->
+<div id="summary-modal" class="modal-backdrop" onclick="if(event.target===this) closeSummary()">
+  <div class="modal-sheet">
+    <div class="card-header">
+      <h2 class="card-title">📊 四間物件總評分與成本比較</h2>
+      <button onclick="closeSummary()" style="border:none; background:#edf2f7; border-radius:8px; padding:5px 10px; font-weight:700; cursor:pointer;">✕ 關閉</button>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.81rem; text-align:center;">
+        <thead>
+          <tr style="background:var(--primary-light); color:var(--primary);">
+            <th style="padding:8px 4px; text-align:left;">比較項目</th>
+            <th style="padding:8px 2px;">1.皇翔<br>MRT</th>
+            <th style="padding:8px 2px;">2.光武<br>3F</th>
+            <th style="padding:8px 2px;">3.中央<br>三段</th>
+            <th style="padding:8px 2px;">4.松柏<br>4F</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:7px 4px; text-align:left; border-bottom:1px solid #edf2f7;">月固定支出</td>
+            <td style="border-bottom:1px solid #edf2f7;"><strong>30.0K</strong></td>
+            <td style="border-bottom:1px solid #edf2f7;"><strong>27.5K</strong></td>
+            <td style="border-bottom:1px solid #edf2f7;"><strong>22.5K</strong></td>
+            <td style="border-bottom:1px solid #edf2f7;"><strong>24.8K</strong></td>
+          </tr>
+          <tr>
+            <td style="padding:7px 4px; text-align:left; border-bottom:1px solid #edf2f7;">仲介費</td>
+            <td style="border-bottom:1px solid #edf2f7; color:var(--success);">免</td>
+            <td style="border-bottom:1px solid #edf2f7; color:var(--success);">免</td>
+            <td style="border-bottom:1px solid #edf2f7; color:var(--warning);">~10.5K</td>
+            <td style="border-bottom:1px solid #edf2f7; color:var(--success);">免</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 4px; text-align:left; border-bottom:1px solid #edf2f7;">方位實測</td>
+            <td id="sum-dir-p1" style="border-bottom:1px solid #edf2f7;">-</td>
+            <td id="sum-dir-p2" style="border-bottom:1px solid #edf2f7;">-</td>
+            <td id="sum-dir-p3" style="border-bottom:1px solid #edf2f7;">-</td>
+            <td id="sum-dir-p4" style="border-bottom:1px solid #edf2f7;">-</td>
+          </tr>
+          <tr style="background:#f8fafc; font-weight:700; font-size:0.95rem; color:var(--primary);">
+            <td style="padding:10px 4px; text-align:left;">綜合總分</td>
+            <td id="total-p1">0</td>
+            <td id="total-p2">0</td>
+            <td id="total-p3">0</td>
+            <td id="total-p4">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="btn-row">
+      <button class="action-btn primary" onclick="copySummary()">📋 複製四間評分與筆記傳給女友</button>
+      <button class="action-btn danger" onclick="resetAll()">🗑️ 清除重填</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'house_hunting_checklist_v2';
+
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function scrollToBlock(blockId, btn) {
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const el = document.getElementById(blockId);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 115;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
+  function updateProgress() {
+    ['p1', 'p2', 'p3', 'p4'].forEach(prop => {
+      const checkboxes = document.querySelectorAll(`input[type="checkbox"][data-prop="${prop}"]`);
+      let checkedCount = 0;
+      checkboxes.forEach(cb => {
+        const parent = cb.closest('.check-item');
+        if (cb.checked) {
+          checkedCount++;
+          if (parent) parent.classList.add('checked');
+        } else {
+          if (parent) parent.classList.remove('checked');
+        }
+      });
+      const pct = checkboxes.length ? Math.round((checkedCount / checkboxes.length) * 100) : 0;
+      const bar = document.getElementById('prog-' + prop);
+      const txt = document.getElementById('text-' + prop);
+      if (bar) bar.style.width = pct + '%';
+      if (txt) txt.textContent = `已完成 ${checkedCount} / ${checkboxes.length} 項 (${pct}%)`;
+    });
+  }
+
+  function calcScores() {
+    ['p1', 'p2', 'p3', 'p4'].forEach(prop => {
+      let sum = 0;
+      document.querySelectorAll(`input[data-score="${prop}"]`).forEach(inp => {
+        const val = parseFloat(inp.value);
+        if (!isNaN(val)) sum += val;
+      });
+      const badgeEl = document.getElementById('badge-' + prop);
+      const totalEl = document.getElementById('total-' + prop);
+      if (badgeEl) badgeEl.textContent = sum;
+      if (totalEl) totalEl.textContent = sum;
+    });
+    saveState();
+  }
+
+  function saveState() {
+    const data = { checks: {}, inputs: {}, scores: {} };
+    document.querySelectorAll('input[type="checkbox"][data-key]').forEach(cb => {
+      data.checks[cb.dataset.key] = cb.checked;
+    });
+    document.querySelectorAll('input[type="text"][data-key], textarea[data-key]').forEach(el => {
+      data.inputs[el.dataset.key] = el.value;
+    });
+    ['p1', 'p2', 'p3', 'p4'].forEach(prop => {
+      data.scores[prop] = [];
+      document.querySelectorAll(`input[data-score="${prop}"]`).forEach((el, idx) => {
+        data.scores[prop][idx] = el.value;
+      });
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    updateProgress();
+  }
+
+  function loadState() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      updateProgress();
+      return;
+    }
+    try {
+      const data = JSON.parse(raw);
+      if (data.checks) {
+        Object.keys(data.checks).forEach(k => {
+          const cb = document.querySelector(`input[type="checkbox"][data-key="${k}"]`);
+          if (cb) cb.checked = data.checks[k];
+        });
+      }
+      if (data.inputs) {
+        Object.keys(data.inputs).forEach(k => {
+          const el = document.querySelector(`[data-key="${k}"]`);
+          if (el) el.value = data.inputs[k];
+        });
+      }
+      if (data.scores) {
+        ['p1', 'p2', 'p3', 'p4'].forEach(prop => {
+          if (data.scores[prop]) {
+            document.querySelectorAll(`input[data-score="${prop}"]`).forEach((el, idx) => {
+              if (data.scores[prop][idx] !== undefined) el.value = data.scores[prop][idx];
+            });
+          }
+        });
+      }
+    } catch (e) {}
+    calcScores();
+    updateProgress();
+  }
+
+  function openSummary() {
+    ['p1', 'p2', 'p3', 'p4'].forEach(prop => {
+      const dirVal = document.querySelector(`[data-key="${prop}_dir"]`)?.value || '-';
+      const cell = document.getElementById('sum-dir-' + prop);
+      if (cell) cell.textContent = dirVal;
+    });
+    document.getElementById('summary-modal').classList.add('open');
+  }
+
+  function closeSummary() {
+    document.getElementById('summary-modal').classList.remove('open');
+  }
+
+  function copySummary() {
+    const props = [
+      { id: 'p1', name: '1. 土城皇翔MRT (30K)' },
+      { id: 'p2', name: '2. 板橋光武街3F (27.5K)' },
+      { id: 'p3', name: '3. 土城中央路三段 (22.5K)' },
+      { id: 'p4', name: '4. 板橋松柏街4F (24.8K)' }
+    ];
+    let lines = ['【週末看屋評分與筆記總結】'];
+    props.forEach(p => {
+      const score = document.getElementById('total-' + p.id).textContent;
+      const dir = document.querySelector(`[data-key="${p.id}_dir"]`)?.value || '未填';
+      const note = document.querySelector(`[data-key="${p.id}_notes"]`)?.value || '無';
+      lines.push(`\n■ ${p.name}：${score} 分（方位：${dir}）\n筆記：${note}`);
+    });
+    const text = lines.join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      alert('已複製四間評分與筆記摘要，可直接貼上 Line 傳給女友！');
+    }).catch(() => {
+      alert(text);
+    });
+  }
+
+  function resetAll() {
+    if (confirm('確定要清除所有勾選與填寫紀錄嗎？')) {
+      localStorage.removeItem(STORAGE_KEY);
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(el => el.value = '');
+      calcScores();
+      updateProgress();
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', loadState);
+</script>
+
+</body>
+</html>
